@@ -1,0 +1,15 @@
+{"timestamp":"00:00:01.761","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:01.761","source":"Server","level":"LOG","message":"  We detected TypeScript in your project and reconfigured your tsconfig.json file for you."}
+{"timestamp":"00:00:01.761","source":"Server","level":"LOG","message":"  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:\n"}
+{"timestamp":"00:00:01.761","source":"Server","level":"LOG","message":"  \t- include was updated to add '.next/dev/types/**/*.ts'"}
+{"timestamp":"00:00:01.761","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:01.761","source":"Server","level":"LOG","message":"  The following mandatory changes were made to your tsconfig.json:\n"}
+{"timestamp":"00:00:01.761","source":"Server","level":"LOG","message":"  \t- jsx was set to react-jsx (next.js uses the React automatic runtime)"}
+{"timestamp":"00:00:01.761","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:01.804","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:30.390","source":"Server","level":"LOG","message":"✓ Compiled in 13ms"}
+{"timestamp":"00:00:38.547","source":"Server","level":"LOG","message":"✓ Compiled in 5ms"}
+{"timestamp":"00:00:48.774","source":"Server","level":"LOG","message":"✓ Compiled in 12ms"}
+{"timestamp":"00:04:52.837","source":"Server","level":"LOG","message":"✓ Compiled in 82ms"}
+{"timestamp":"00:06:08.468","source":"Server","level":"LOG","message":"✓ Compiled in 92ms"}
+{"timestamp":"00:07:49.913","source":"Server","level":"LOG","message":"✓ Compiled in 89ms"}
