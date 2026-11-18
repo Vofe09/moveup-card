@@ -4,11 +4,13 @@
 
 :root {
   color-scheme: dark;
-  --background: #101112;
-  --foreground: #f5f5f5;
-  --accent: #6494ff;
-  --button-background: #20242e;
-  --button-border: #405b91;
+  --background: #080b12;
+  --foreground: #f5f7ff;
+  --accent: #8bb1ff;
+  --glass-fill: rgb(255 255 255 / 7%);
+  --glass-stroke: rgb(255 255 255 / 16%);
+  --glass-highlight: rgb(255 255 255 / 23%);
+  --glass-shadow: 0 28px 90px rgb(0 0 0 / 48%);
 }
 
 html,
@@ -18,7 +20,12 @@ body {
 }
 
 body {
-  background: var(--background);
+  overflow-x: hidden;
+  background:
+    radial-gradient(ellipse at 50% 10%, rgb(49 91 164 / 22%), transparent 42%),
+    radial-gradient(ellipse at 8% 78%, rgb(30 78 135 / 16%), transparent 35%),
+    radial-gradient(ellipse at 92% 82%, rgb(83 65 155 / 13%), transparent 34%),
+    var(--background);
   color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
     "Segoe UI", sans-serif;
@@ -27,6 +34,7 @@ body {
 
 .page {
   position: relative;
+  isolation: isolate;
   display: flex;
   min-height: 100svh;
   align-items: center;
@@ -34,9 +42,82 @@ body {
   padding: 48px 24px 64px;
 }
 
+.page::before,
+.page::after {
+  position: fixed;
+  z-index: -1;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  content: "";
+  filter: blur(85px);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.page::before {
+  top: 8%;
+  left: 12%;
+  background: rgb(54 117 235 / 32%);
+}
+
+.page::after {
+  right: 10%;
+  bottom: 5%;
+  background: rgb(110 91 220 / 25%);
+}
+
 .contact {
-  width: min(100%, 528px);
+  width: min(100%, 590px);
   margin-top: -4px;
+}
+
+.glassCard {
+  position: relative;
+  overflow: hidden;
+  padding: 42px 30px 34px;
+  border: 1px solid var(--glass-stroke);
+  border-radius: 34px;
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 11%), transparent 38%),
+    linear-gradient(315deg, rgb(117 159 255 / 5%), transparent 48%),
+    rgb(22 27 39 / 58%);
+  box-shadow:
+    var(--glass-shadow),
+    inset 0 1px 0 rgb(255 255 255 / 20%),
+    inset 0 -1px 0 rgb(255 255 255 / 5%);
+  -webkit-backdrop-filter: blur(32px) saturate(165%);
+  backdrop-filter: blur(32px) saturate(165%);
+}
+
+.glassCard::before {
+  position: absolute;
+  top: 0;
+  left: 12%;
+  width: 76%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 55%), transparent);
+  content: "";
+  pointer-events: none;
+}
+
+.glassCard::after {
+  position: absolute;
+  top: -150px;
+  right: -120px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgb(107 155 255 / 11%);
+  content: "";
+  filter: blur(55px);
+  pointer-events: none;
+}
+
+.brand,
+.links {
+  position: relative;
+  z-index: 1;
 }
 
 .brand {
@@ -54,10 +135,14 @@ body {
   place-items: center;
   overflow: hidden;
   margin-bottom: 17px;
-  border: 1px solid rgb(100 148 255 / 28%);
+  border: 1px solid rgb(255 255 255 / 22%);
   border-radius: 26px;
-  background: #20242e;
-  box-shadow: 0 12px 42px rgb(0 0 0 / 24%);
+  background: linear-gradient(145deg, rgb(255 255 255 / 14%), rgb(255 255 255 / 4%));
+  box-shadow:
+    0 12px 42px rgb(0 0 0 / 24%),
+    inset 0 1px 0 rgb(255 255 255 / 24%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
 }
 
 .logoFrame img {
@@ -72,11 +157,12 @@ body {
   font-weight: 760;
   letter-spacing: -2.4px;
   line-height: 1.08;
+  text-shadow: 0 2px 22px rgb(112 157 255 / 14%);
 }
 
 .brand p {
   margin: 0;
-  color: #e6e6e6;
+  color: rgb(241 245 255 / 78%);
   font-size: 19px;
   font-weight: 450;
 }
@@ -91,56 +177,86 @@ body {
   position: relative;
   display: flex;
   width: 100%;
-  min-height: 58px;
+  min-height: 60px;
   align-items: center;
   justify-content: center;
   gap: 12px;
   padding: 0 48px;
-  border: 1px solid var(--button-border);
+  overflow: hidden;
+  border: 1px solid rgb(185 207 255 / 22%);
   border-radius: 999px;
-  background: var(--button-background);
+  background:
+    linear-gradient(115deg, rgb(255 255 255 / 10%), rgb(255 255 255 / 3%) 52%, rgb(137 173 255 / 7%)),
+    rgb(255 255 255 / 4%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 18%),
+    inset 0 -1px 0 rgb(0 0 0 / 12%),
+    0 8px 24px rgb(0 0 0 / 12%);
   color: var(--foreground);
   font-size: 18px;
   font-weight: 650;
   text-align: center;
   text-decoration: none;
+  -webkit-backdrop-filter: blur(22px) saturate(175%);
+  backdrop-filter: blur(22px) saturate(175%);
   transition:
-    transform 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+    transform 220ms cubic-bezier(.2,.8,.2,1),
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.contactButton::before {
+  position: absolute;
+  top: 0;
+  left: 12%;
+  width: 76%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 34%), transparent);
+  content: "";
+  pointer-events: none;
 }
 
 .buttonIcon {
   flex: 0 0 auto;
-  color: #a9c2ff;
+  color: #b7ceff;
+  filter: drop-shadow(0 0 8px rgb(108 157 255 / 28%));
 }
 
 .externalIcon {
   position: absolute;
   right: 22px;
-  color: #8daeff;
+  color: #a9c3ff;
 }
 
 .unavailable {
   cursor: not-allowed;
-  opacity: 0.52;
+  opacity: 0.48;
 }
 
 .setupHint {
   position: absolute;
   right: 22px;
-  color: #8b909b;
+  color: #a4aebe;
   font-size: 11px;
   font-weight: 500;
 }
 
 @media (hover: hover) {
   .contactButton:not(.unavailable):hover {
-    transform: translateY(-1px);
-    border-color: #7097e0;
-    background: #292f3d;
-    box-shadow: 0 8px 28px rgb(0 0 0 / 20%);
+    transform: translateY(-2px) scale(1.008);
+    border-color: rgb(164 195 255 / 52%);
+    background:
+      linear-gradient(115deg, rgb(255 255 255 / 17%), rgb(255 255 255 / 7%) 52%, rgb(137 173 255 / 13%)),
+      rgb(255 255 255 / 7%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 27%),
+      0 12px 34px rgb(27 66 137 / 24%),
+      0 0 24px rgb(100 148 255 / 10%);
+  }
+
+  .contactButton:not(.unavailable):hover .buttonIcon {
+    color: #d7e4ff;
   }
 }
 
@@ -149,7 +265,7 @@ body {
 }
 
 .contactButton:focus-visible {
-  outline: 2px solid #8eafff;
+  outline: 2px solid #a9c3ff;
   outline-offset: 4px;
 }
 
@@ -158,18 +274,27 @@ body {
   right: 20px;
   bottom: 16px;
   left: 20px;
-  color: #666b75;
+  color: rgb(190 199 216 / 48%);
   font-size: 12px;
   text-align: center;
 }
 
 @media (max-width: 600px) {
   .page {
-    padding: 34px 20px 56px;
+    padding: 24px 16px 56px;
+  }
+
+  .contact {
+    width: 100%;
+  }
+
+  .glassCard {
+    padding: 32px 18px 24px;
+    border-radius: 29px;
   }
 
   .brand {
-    margin-bottom: 26px;
+    margin-bottom: 25px;
   }
 
   .logoFrame {
@@ -188,7 +313,23 @@ body {
 
   .contactButton {
     min-height: 56px;
+    padding-inline: 40px;
     font-size: 16px;
+  }
+
+  .externalIcon,
+  .setupHint {
+    right: 16px;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glassCard {
+    background: rgb(22 27 39 / 96%);
+  }
+
+  .contactButton {
+    background: rgb(36 43 59 / 96%);
   }
 }
 

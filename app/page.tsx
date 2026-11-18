@@ -32,6 +32,7 @@ export default function Home() {
   return (
     <main className="page">
       <section className="contact" aria-label="Контакты MoveUp">
+        <div className="glassCard">
         <header className="brand">
           <div className="logoFrame">
             <Image
@@ -89,6 +90,7 @@ export default function Home() {
             );
           })}
         </nav>
+        </div>
       </section>
 
       <footer className="footer">
