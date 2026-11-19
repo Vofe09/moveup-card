@@ -34,6 +34,7 @@ body {
 
 .page {
   position: relative;
+  z-index: 1;
   isolation: isolate;
   display: flex;
   min-height: 100svh;
@@ -67,7 +68,124 @@ body {
   background: rgb(110 91 220 / 25%);
 }
 
+.interactiveBackground {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+
+.backgroundCanvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0.96;
+}
+
+.auroraLayer {
+  position: absolute;
+  inset: -18%;
+  overflow: hidden;
+  opacity: var(--aurora-opacity, 0.25);
+  mix-blend-mode: screen;
+  filter: saturate(125%);
+}
+
+.auroraBlob {
+  position: absolute;
+  width: min(68vw, 900px);
+  aspect-ratio: 1;
+  border-radius: 44% 56% 64% 36% / 43% 48% 52% 57%;
+  filter: blur(74px);
+  will-change: transform, border-radius;
+  animation-duration: var(--aurora-duration, 32s);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.auroraBlobOne {
+  top: -19%;
+  left: -9%;
+  background: radial-gradient(circle at 42% 45%, rgb(46 126 255 / 58%), rgb(31 75 170 / 16%) 48%, transparent 72%);
+  animation-name: auroraDriftOne;
+}
+
+.auroraBlobTwo {
+  right: -16%;
+  bottom: -26%;
+  width: min(72vw, 960px);
+  background: radial-gradient(circle at 50% 50%, rgb(92 73 221 / 48%), rgb(45 99 181 / 14%) 52%, transparent 73%);
+  animation-name: auroraDriftTwo;
+  animation-delay: -9s;
+}
+
+.auroraBlobThree {
+  top: 30%;
+  left: 34%;
+  width: min(48vw, 650px);
+  background: radial-gradient(circle at 50% 50%, rgb(28 177 218 / 30%), rgb(45 102 177 / 10%) 51%, transparent 72%);
+  animation-name: auroraDriftThree;
+  animation-delay: -16s;
+}
+
+.holographicGrid {
+  position: absolute;
+  right: -24%;
+  bottom: -42%;
+  left: -24%;
+  height: 82%;
+  opacity: var(--grid-opacity, 0.12);
+  background-image:
+    linear-gradient(to right, rgb(108 164 255 / 52%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(108 164 255 / 52%) 1px, transparent 1px);
+  background-size: var(--grid-spacing, 58px) var(--grid-spacing, 58px);
+  transform: perspective(680px) rotateX(64deg) scale(1.12);
+  transform-origin: center top;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 75%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 75%, transparent 100%);
+}
+
+.holographicGrid::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 25%, rgb(86 153 255 / 26%) 50%, transparent 74%);
+  content: "";
+  animation: gridScan 10s linear infinite;
+}
+
+@keyframes auroraDriftOne {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(0.92); border-radius: 44% 56% 64% 36% / 43% 48% 52% 57%; }
+  50% { transform: translate3d(16%, 12%, 0) rotate(24deg) scale(1.08); border-radius: 61% 39% 42% 58% / 54% 37% 63% 46%; }
+  100% { transform: translate3d(7%, 22%, 0) rotate(-12deg) scale(1); border-radius: 38% 62% 55% 45% / 60% 49% 51% 40%; }
+}
+
+@keyframes auroraDriftTwo {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate3d(-16%, -18%, 0) rotate(-22deg) scale(0.88); }
+  100% { transform: translate3d(-28%, -7%, 0) rotate(17deg) scale(1.12); }
+}
+
+@keyframes auroraDriftThree {
+  0% { transform: translate3d(-12%, 8%, 0) scale(0.85); }
+  50% { transform: translate3d(12%, -16%, 0) scale(1.15); }
+  100% { transform: translate3d(22%, 13%, 0) scale(0.95); }
+}
+
+@keyframes gridScan {
+  0% { transform: translateY(-65%); opacity: 0; }
+  20% { opacity: 0.65; }
+  80% { opacity: 0.4; }
+  100% { transform: translateY(65%); opacity: 0; }
+}
+
 .contact {
+  position: relative;
+  z-index: 2;
   width: min(100%, 590px);
   margin-top: -4px;
 }
@@ -271,6 +389,7 @@ body {
 
 .footer {
   position: absolute;
+  z-index: 2;
   right: 20px;
   bottom: 16px;
   left: 20px;
@@ -280,6 +399,22 @@ body {
 }
 
 @media (max-width: 600px) {
+  .auroraBlob {
+    width: 105vw;
+    filter: blur(60px);
+  }
+
+  .holographicGrid {
+    right: -55%;
+    left: -55%;
+    bottom: -34%;
+    height: 68%;
+  }
+
+  .backgroundCanvas {
+    opacity: 0.82;
+  }
+
   .page {
     padding: 24px 16px 56px;
   }
@@ -340,5 +475,13 @@ body {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .auroraBlob,
+  .holographicGrid::after {
+    animation: none !important;
   }
 }
