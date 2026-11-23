@@ -2,6 +2,7 @@
  * Единый файл настроек сайта MoveUp.
  * Меняйте тексты, контакты, подписи и ссылки здесь.
  * Пустая ссылка означает, что пункт пока не активирован.
+ * Публикации находятся в config/media.ts.
  */
 
 export const siteConfig = {
@@ -16,7 +17,7 @@ export const siteConfig = {
     whatsapp: "https://wa.me/77767207744", 
     instagram: "https://www.instagram.com/move_up.kz?knvt=MmY5dG1wY3pvc2xx", 
     website: "https://moveup.ictlab.kz",
-    news: "",
+    news: "/media",
     video: "https://drive.google.com/drive/folders/1q-HAeR2d49F-xHWTbkHbhfURMq9ESZUs?usp=share_link",
   },
 

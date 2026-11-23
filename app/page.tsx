@@ -9,50 +9,8 @@ import {
   WhatsappLogo,
 } from "@phosphor-icons/react/dist/ssr";
 import { siteConfig } from "@/config/siteConfig";
-import InteractiveBackground, { type BackgroundSettings } from "@/components/InteractiveBackground";
-
-// Настройки интерактивного фона находятся прямо здесь, в app/page.tsx.
-// Отключайте слои через true/false и регулируйте интенсивность ниже.
-const backgroundSettings: BackgroundSettings = {
-  enabled: true,
-  intensity: "high", // "low" | "medium" | "high"
-
-  interaction: {
-    cursor: true,       // реакция на движение мыши
-    touch: true,        // реакция на касания на телефонах
-    clickRipples: true, // импульсная волна при клике/касании
-  },
-
-  layers: {
-    neuralNetwork: true,  // 1. движущиеся узлы и связи
-    matrixRain: true,     // 2. цифровой дождь
-    aurora: true,         // 3. жидкие световые потоки
-    holographicGrid: true, // перспективная сетка — дополнительный слой
-  },
-
-  neuralNetwork: {
-    particleCount: 88,
-    connectionDistance: 142,
-    speed: 1,
-    cursorRadius: 190,
-  },
-
-  matrixRain: {
-    opacity: 0.13,
-    fontSize: 15,
-    speed: 0.8,
-  },
-
-  aurora: {
-    opacity: 0.27,
-    duration: 32,
-  },
-
-  holographicGrid: {
-    opacity: 0.12,
-    spacing: 58,
-  },
-};
+import InteractiveBackground from "@/components/InteractiveBackground";
+import { backgroundSettings } from "@/config/backgroundSettings";
 
 const iconMap = {
   phone: Phone,
@@ -138,9 +96,6 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="footer">
-        MoveUp © {new Date().getFullYear()}
-      </footer>
     </main>
   );
 }
